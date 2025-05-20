@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets,permissions,generics
 from .models import CustomUser
 from .serializers import UserSerializer
 from rest_framework.permissions import AllowAny
@@ -12,3 +12,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+class UserProfileUpdateView(generics.RetrieveUpdateAPIView):
+    queryset=CustomUser.objects.all()
+    serializer_class = UserProfileUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    def get_object(self):
+        return self.request.user  

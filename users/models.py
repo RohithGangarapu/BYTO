@@ -28,6 +28,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('partner', 'Partner'),
         ('customer', 'Customer'),
     )
+    photo=models.ImageField(upload_to='./userimages',blank=True,default=None)
     firstname = models.CharField(max_length=20, blank=True)  # Changed from default=None
     lastname = models.CharField(max_length=25, blank=True)   # Changed from default=None
     email = models.EmailField(unique=True)
