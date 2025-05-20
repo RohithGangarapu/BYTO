@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import user
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:
-        model = CustomUser
+        model = user
         fields = ['user_type','firstname','lastname','email','phone','password']
         read_only_fields = ['id']
 
     def create(self, validated_data):
-        return CustomUser.objects.create_user(**validated_data)
+        return user.objects.create_user(**validated_data)
     
 class UserProfileUpdateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False, allow_blank=True)
 
     class Meta:
-        model = CustomUser
+        model = user
         fields = ['firstname', 'lastname', 'photo', 'password','email','phone']
 
     def update(self, instance, validated_data):

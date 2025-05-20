@@ -23,7 +23,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('phone', 0)
         
         return self.create_user(email, password, **extra_fields)
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class user(AbstractBaseUser, PermissionsMixin):
     USER_TYPE_CHOICES = (
         ('partner', 'Partner'),
         ('customer', 'Customer'),
